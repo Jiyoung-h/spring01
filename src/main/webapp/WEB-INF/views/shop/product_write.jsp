@@ -4,11 +4,24 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
-<script src="http://code.jquery.com/jquery-3.4.1.min.js"></script>
+<!-- <script src="${path }/ckeditor/ckeditor.js"></script>  --> 
+<!-- include libraries(jQuery, bootstrap) -->
+<link href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" rel="stylesheet">
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+<!-- include summernote css/js -->
+<link href="${path }/summernote/summernote.css" rel="stylesheet">
+<script src="${path }/summernote/summernote.js"></script>
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <script>
+	$(function(){
+		$("#description").summernote({
+			height: 300,
+			width: 800
+		});
+	});
 	function product_write(){
 		var product_name = document.form1.product_name.value;
 		var price = document.form1.price.value;
@@ -23,11 +36,11 @@
 			document.form1.price.focus();
 			return;
 		}
-		if(description == ""){
+		/*if(description == ""){
 			alert("상품설명을 입력하세요");
 			document.form1.description.focus();
 			return;
-		}
+		}*/
 		document.form1.action="${path}/shop/product/insert.do";
 		document.form1.submit();
 	}
@@ -50,6 +63,13 @@
 			<td>상품설명</td>
 			<td><textarea rows="5" cols="60" name="description" id="description"></textarea></td>
 		</tr>
+<!-- 
+	<script>
+		CKEDITOR.replace("description",{
+			filebrowserUploadUrl : "${path}/imageUpload.do"
+		});
+	</script>
+ -->	
 		<tr>
 			<td>상품이미지</td>
 			<td><input type="file" name="file1"></td>
